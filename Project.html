@@ -1,0 +1,85 @@
+<html>
+<head>
+<script type="text/javascript">
+var showing = 0;
+var numpics = 16;
+var first, second;
+var spot = 0;
+var picsleft = numpics;
+var graph = [" ", " ", " ", " ", " ", " ", " ", " ",
+		" ", " ", " ", " ", " ", " ", " ", " "];
+var pics = ["Palm.jpeg", "Gazebo.jpg", "Forest.jpg", "train.jpg",
+	 "church.jpg", "earth.jpg", "house.jpg", "waterfall.jpg"];
+function show(picture){
+	if(document.getElementById(picture).getAttribute("src") != "Card.jpg" 
+		&& document.getElementById(picture).getAttribute("src") != "xCard.jpg.pagespeed.ic.9qkET20Xyi.webp"){
+		return;
+	}
+	document.getElementById(picture).src=get(picture)
+	if(showing == 0){
+		showing = 1;
+		first = picture;
+	}
+	else if(showing == 1){
+		showing = 2;
+		second = picture;
+		if(picsleft == 2){
+			alert("Congratulations! You win!");
+		}
+	}
+	else{
+		showing = 1;
+		if(get(first) != get(second)){
+			document.getElementById(first).src="Card.jpg"
+			document.getElementById(second).src="Card.jpg"
+		}
+		else{
+			picsleft -= 2;
+		}
+		first = picture;
+	}
+}
+function setstuff(){
+	var num = 0;
+	while(spot < numpics){
+		num = Math.floor(Math.random() * numpics);
+		if(graph[num] == " "){
+			graph[num] = pics[Math.floor(spot/2)];
+			spot++;
+		}
+	}
+}
+function get(picture){
+	if(spot < numpics){
+		setstuff();
+	}
+	return graph[parseInt(picture)];
+}
+</script>
+<style>
+.pic{
+    width: 130px;
+    height: 130px;
+}
+</style>
+</head>
+<body>
+<h1>Matching Game</h1>
+<img id="0" class="pic" src="Card.jpg" onclick="show('0')">
+<img id="1" class="pic" src="Card.jpg" onclick="show('1')">
+<img id="2" class="pic" src="Card.jpg" onclick="show('2')">
+<img id="3" class="pic" src="Card.jpg" onclick="show('3')"><br>
+<img id="4" class="pic" src="Card.jpg" onclick="show('4')">
+<img id="5" class="pic" src="Card.jpg" onclick="show('5')">
+<img id="6" class="pic" src="Card.jpg" onclick="show('6')">
+<img id="7" class="pic" src="Card.jpg" onclick="show('7')"><br>
+<img id="8" class="pic" src="Card.jpg" onclick="show('8')">
+<img id="9" class="pic" src="Card.jpg" onclick="show('9')">
+<img id="10" class="pic" src="Card.jpg" onclick="show('10')">
+<img id="11" class="pic" src="Card.jpg" onclick="show('11')"><br>
+<img id="12" class="pic" src="Card.jpg" onclick="show('12')">
+<img id="13" class="pic" src="Card.jpg" onclick="show('13')">
+<img id="14" class="pic" src="Card.jpg" onclick="show('14')">
+<img id="15" class="pic" src="Card.jpg" onclick="show('15')"><br>
+</body>
+</html>
